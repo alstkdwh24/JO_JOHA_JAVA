@@ -116,7 +116,7 @@ header {
 
 .loginBox {
     width: 34%;
-    height: 60%;
+    height: 70%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -238,10 +238,7 @@ header {
 
 /* 여기부터 구글버튼 */
 .gsi-material-button {
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    -webkit-appearance: none;
+
     background-color: WHITE;
     background-image: none;
     border: 1px solid #747775;
@@ -425,8 +422,7 @@ header {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     /* 그림자 효과 */
     border-radius: 10px;
-    justify-content: center;
-    align-items: center;
+
 
 }
 
@@ -444,6 +440,56 @@ header {
 }
 
 .apple-login-box {
+    width: 84%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    padding: 0 9% 0 0;
+    color: white
+}
+
+.jo-joha-login-btn {
+    border: none;
+    /* 버튼 테두리 제거 */
+    background: none;
+    /* 버튼 배경 제거 */
+    padding: 0;
+    /* 내부 여백 제거 */
+    cursor: pointer;
+    /* 마우스 포인터 변경 */
+    width: 80%;
+    min-height: 50px;
+    max-height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    background-color: #000000;
+    /* 정확한 파란색 배경 */
+    /* 파란색 배경 */
+    /* 파란색 배경 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* 그림자 효과 */
+    border-radius: 10px;
+
+}
+
+.jo-joha-signin {
+    width: 16%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.jo-joha-login-btn-image {
+    width: 50%;
+    height: 50%;
+    color: white;
+}
+
+.jo-joha-login-box {
     width: 84%;
     height: 100%;
     display: flex;

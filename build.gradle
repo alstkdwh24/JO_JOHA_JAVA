@@ -37,3 +37,6 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+tasks.withType(JavaCompile) {
+    options.compilerArgs << "-parameters" // 컴파일러 플래그 추가
+}
