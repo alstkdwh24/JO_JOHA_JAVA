@@ -1,4 +1,4 @@
-package com.example.config;
+package com.example.trip.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -9,8 +9,8 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**").allowedOrigins("http://localhost:8081") // 프론트엔드 도메인
+        registry.addMapping("/**").allowedOrigins("http://localhost:8081") // 명시적으로 도메인 설정
                 .allowedMethods("GET", "POST", "PUT", "DELETE").allowedHeaders("*")
-                .allowCredentials(true);
+                .allowCredentials(true); // 자격 증명 허용
     }
 }

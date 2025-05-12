@@ -27,35 +27,40 @@ public class RestLoginCotroller {
     public RedirectView kakaoAuth(@RequestParam("code") String code) {
         String tokenUrl = "https://kauth.kakao.com/oauth/token";
 
-        // 요청 파라미터 설정
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.add("grant_type", "authorization_code");
         params.add("client_id", clientId);
         params.add("redirect_uri", redirectUri);
         params.add("code", code);
 
-        // HTTP 요청 헤더 설정
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
-        // 요청 생성
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(params, headers);
 
         RestTemplate restTemplate = new RestTemplate();
         try {
-            // 카카오 API에 POST 요청
+            // POST 요청을 보내고 응답을 받음
             ResponseEntity<String> response =
                     restTemplate.postForEntity(tokenUrl, request, String.class);
 
-            // 액세스 토큰 처리 (필요 시 저장하거나 사용)
             System.out.println("Access Token Response: " + response.getBody());
-
-            // 인증 성공 후 메인 페이지로 리다이렉트
             return new RedirectView("/main");
         } catch (Exception e) {
             e.printStackTrace();
-            // 인증 실패 시 에러 페이지로 리다이렉트
+            // 에러 처리
             return new RedirectView("/main");
         }
     }
+    // @PostMapping("/jo-joha/join")
+    // public ResponseEntity<ArrayList<KakaoVO>> postJoin(){
+    // int saveJoin = RestLoginControllerService.saveJoin();
+    // }
+
+
+    // 액세스 토큰 처리 (필요 시 저장하거나 사용)
+
+    // 인증 성공 후 메인 페이지로 리다이렉트
+
+
 }
