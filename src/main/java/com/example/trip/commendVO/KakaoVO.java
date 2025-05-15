@@ -10,15 +10,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class KakaoVO {
-    private String id;
-    private String nickname;
-    private String email;
-    private String profile_image;
-    private String thumbnail_image;
-    private String access_token;
-    private String refresh_token;
-    private String token_type;
-    private String expires_in;
-    private String scope;
+    private String authorizationCodes; // 클라이언트로부터 전달받은 인증 코드
+
+    // 필요시 추가 필드
+    private String grantType;          // 기본적으로 "authorization_code" 사용
+    private String clientId;           // Kakao REST API 키
+private String accessToken;
 
 }
