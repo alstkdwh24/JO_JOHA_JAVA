@@ -4,10 +4,7 @@ import com.example.trip.commendVO.KakaoVO;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
@@ -24,9 +21,16 @@ public class RestLoginCotroller {
     @Value("${kakao.rest-api-key}") // 환경 변수 또는 application.properties에서 REST API 키를 읽어옴
     private String clientId;
 
+
+
     @Value("${kakao.redirect-uri}") // 환경 변수 또는 application.properties에서 Redirect URI를 읽어옴
     private String redirectUri;
 
+    @Value("${naver.client-id}")
+    private String naverClientId;
+
+    @Value("${naver.client-secret}")
+    private String naverClientSecret;
 
     // @PostMapping("kakao/auth")
     // public ResponseEntity
@@ -81,6 +85,31 @@ public class RestLoginCotroller {
         }
     }
 
+
+    @GetMapping("/naver/token")
+    public ResponseEntity<String> requestNaverUserInfo
+            (@RequestHeader("Authorization") String authorizationHeader
+
+
+            ) {
+
+        String apiUrl = "https://openapi.naver.com/v1/nid/me";
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization", authorizationHeader);
+
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+        // RestTemplate을 이용해 GET 요청
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<String> response = restTemplate.exchange(
+                apiUrl, HttpMethod.GET, entity, String.class);
+
+
+
+        return ResponseEntity.ok(response.getBody()); // JSON Response 반환
+
+
+
+    }
 
 
 }

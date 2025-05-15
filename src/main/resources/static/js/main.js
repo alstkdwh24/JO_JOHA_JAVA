@@ -1,7 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
+
+    // 위의 세개의 변수는 네이버 구글 카카오 다 적용
     const urlParams = new URLSearchParams(window.location.search);
     const authorizationCode = urlParams.get("code");
-    console.log("authorizationCode"+authorizationCode);
+    const stateToken = urlParams.get("state");
+
+    console.log("authorizationCode" + authorizationCode);
     console.log(urlParams);
     let accessToken = "";
     if (authorizationCode) {
@@ -35,4 +39,36 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
     }
+    const hash = window.location.hash; // # 뒤의 값
+    console.log("해시 값(raw):", hash); // 예: #access_token=...&state=...&token_type=bearer&expires_in=3600
+
+
+    if (hash) {
+
+        const params = new URLSearchParams(hash.slice(1));
+        const accessToken = params.get("access_token");
+        const stateToken = params.get("state");
+        const tokenType = params.get("token_type");
+        const expiresIn = params.get("expires_in");
+
+        // 값 출력 (디버깅용)
+        console.log("Access Token:", accessToken);
+        console.log("State Token:", stateToken);
+        if (accessToken && stateToken) {
+
+            fetch("/api/kakao/naver/token", {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${accessToken}`
+
+                },
+
+            }).then(response => response.json()).then(data => {
+                console.log("Access Token" + data.access_token);
+            }).catch((error) => console.log(error));
+        } else {
+            console.log("authorizationCode가 없습니다.");
+        }
+    }
+
 })
