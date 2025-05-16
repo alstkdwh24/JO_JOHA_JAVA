@@ -9,6 +9,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,7 +23,6 @@ public class RestLoginCotroller {
     private String clientId;
 
 
-
     @Value("${kakao.redirect-uri}") // 환경 변수 또는 application.properties에서 Redirect URI를 읽어옴
     private String redirectUri;
 
@@ -32,6 +32,11 @@ public class RestLoginCotroller {
     @Value("${naver.client-secret}")
     private String naverClientSecret;
 
+    @Value("${google.client-id}")
+    private String googleClientId;
+
+    @Value("{google.client-secret}")
+    private String googleClientSecret;
     // @PostMapping("kakao/auth")
     // public ResponseEntity
 
@@ -85,6 +90,23 @@ public class RestLoginCotroller {
         }
     }
 
+    @GetMapping("/people")
+    public ResponseEntity<String> getKakaoPeople(@RequestHeader("Authorization") String authorizationHeader) {
+        String apiUrl = "https://kapi.kakao.com/v2/user/me";
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization", authorizationHeader); // Access Token 추가
+
+        RestTemplate restTemplate = new RestTemplate();
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+
+        try {
+            ResponseEntity<String> response = restTemplate.exchange(apiUrl, HttpMethod.GET, entity, String.class);
+            return ResponseEntity.ok(response.getBody());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("카카오 사용자 정보 요청 실패: " + e.getMessage());
+        }
+    }
+
 
     @GetMapping("/naver/token")
     public ResponseEntity<String> requestNaverUserInfo
@@ -104,12 +126,17 @@ public class RestLoginCotroller {
                 apiUrl, HttpMethod.GET, entity, String.class);
 
 
-
         return ResponseEntity.ok(response.getBody()); // JSON Response 반환
-
 
 
     }
 
+    @GetMapping("/google/token")
+    public RedirectView loginGoogle() {
+        String googleOAuthUrl = "https://accounts.google.com/o/oauth2/v2/auth?client_id=681742877030-doou6qgccdg23s3mjbqa8ktioi9sbhvg.apps.googleusercontent.com"
+                + "&redirect_uri=http://localhost:8080/api/v1/oauth2/google"
+                + "&response_type=code&scope=email%20profile%20openid&access_type=offline";
+        return new RedirectView(googleOAuthUrl);
+    }
 
 }

@@ -28,6 +28,26 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.log("Access Token:", accessToken);
                 console.log("Refresh Token:", refreshToken);
                 console.log("ID Token:", idToken);
+                fetch("/api/kakao/people", {
+                    method: "GET",
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`, // Access Token 삽입
+                        "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
+
+
+                    },
+                }).then(response => {
+                    if (!response.ok) {
+                        throw new Error(response.statusText);
+                    }
+                    return response.json();
+
+                }).then(data => {
+                    console.log("카카오 사용자 데이터:", data);
+                })
+                    .catch(error => {
+                        console.error("API 요청 중 오류 발생:", error);
+                    });
 
 
             },
@@ -39,6 +59,8 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
     }
+
+
     const hash = window.location.hash; // # 뒤의 값
     console.log("해시 값(raw):", hash); // 예: #access_token=...&state=...&token_type=bearer&expires_in=3600
 
