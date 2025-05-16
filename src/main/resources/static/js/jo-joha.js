@@ -53,5 +53,11 @@ document.addEventListener("DOMContentLoaded", function () {
         console.error('네이버 로그인 버튼을 찾을 수 없습니다. "naver-login-btn" 클래스를 확인하세요.');
         alert("로그인 버튼 UI를 찾을 수 없습니다. 관리자에게 문의하세요.");
     }
+
+    let gsi_material_button=document.querySelector(".gsi-material-button");
+    gsi_material_button.addEventListener("click",function(){
+        window.location.href = "/api/kakao/google/token";
+
+    });
 })
 
