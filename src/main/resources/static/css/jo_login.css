@@ -162,6 +162,7 @@ header {
     cursor: pointer;
     /* 마우스 포인터 변경 */
     width: 80%;
+    border-radius: 5px;
 }
 
 .kakao-login-btn img {
@@ -353,7 +354,6 @@ header {
 .email-login-btn {
     border: none;
     /* 버튼 테두리 제거 */
-    background: none;
     /* 버튼 배경 제거 */
     padding: 0;
     /* 내부 여백 제거 */
@@ -362,13 +362,14 @@ header {
     width: 80%;
     min-height: 50px;
     display: flex;
-    background-color: #2196F3;
+    background-color: black;
+    color: white;
     /* 정확한 파란색 배경 */
     /* 파란색 배경 */
     /* 파란색 배경 */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    /* 그림자 효과 */
-    border-radius: 4px;
+
+    border-radius: 5px;
     justify-content: center;
     align-items: center;
 
@@ -421,7 +422,7 @@ header {
     /* 파란색 배경 */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     /* 그림자 효과 */
-    border-radius: 10px;
+    border-radius: 5px;
 
 
 }
@@ -471,7 +472,7 @@ header {
     /* 파란색 배경 */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     /* 그림자 효과 */
-    border-radius: 10px;
+    border-radius: 5px;
 
 }
 
