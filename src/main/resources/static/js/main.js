@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let accessToken = "";
     if (authorizationCode) {
         console.log("리디렉션에서 받은 인증 코드:", authorizationCode);
-
+    //카카오톡 로그인
         $.ajax({
             type: "POST", // 'Get'을 'POST'로 변경
             url: "/api/kakao/token",
@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 const accessToken = response.access_token;
                 const refreshToken = response.refresh_token;
                 const idToken = response.id_token;
-
+                console.log("카카오");
                 console.log("Access Token:", accessToken);
                 console.log("Refresh Token:", refreshToken);
                 console.log("ID Token:", idToken);
@@ -55,16 +55,36 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.error("Error:", error);
                 console.error("Status:", status);
                 console.error("Response:", xhr.responseText);
+                con
             }
         });
+        //구글 로그인
+        $.ajax({
+            type:"POST",
+            url:"/api/kakao/google/token",
+            contentType:"application/json",
+            headers:{
+                "Authorization": authorizationCode // 헤더에 실제 인증 토큰 추가
 
+            },       data: JSON.stringify({ code: "AUTHORIZATION_CODE_FROM_GOOGLE"
+            }),
+            success:function (response) {
+                let accessToken = response.access_token;
+                let refreshToken = response.refresh_token;
+                let idToken = response.id_token;
+                console.log("Access Token:", accessToken);
+                console.log("Refresh Token:", refreshToken);
+                console.log("ID Token:", idToken);
+                console.log("구글:", response);
+            }
+        })
     }
 
 
     const hash = window.location.hash; // # 뒤의 값
     console.log("해시 값(raw):", hash); // 예: #access_token=...&state=...&token_type=bearer&expires_in=3600
 
-
+//네이버 로그인
     if (hash) {
 
         const params = new URLSearchParams(hash.slice(1));

@@ -56,7 +56,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let gsi_material_button=document.querySelector(".gsi-material-button");
     gsi_material_button.addEventListener("click",function(){
-        window.location.href = "/api/kakao/google/token";
+        window.location.href = "/api/kakao/google/auth";
+
 
     });
 })
