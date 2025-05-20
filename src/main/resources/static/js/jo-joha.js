@@ -23,13 +23,14 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-
     let naver_id_login = new naver.LoginWithNaverId({
-        clientId:  "ApscJ4M6B8itF7sgJsCI", // 환경 변수로 관리
+        clientId: "ApscJ4M6B8itF7sgJsCI", // 환경 변수로 관리
         callbackUrl: "http://localhost:8081/main", // 환경 변수로 관리
         isPopup: true, // 팝업 방식 사용 여부
-        loginButton: { class : "naver-login-btn"
-            ,color: "green", type: 3, height: 48 }, // 로그인 버튼 스타일
+        loginButton: {
+            class: "naver-login-btn"
+            , color: "green", type: 3, height: 48
+        }, // 로그인 버튼 스타일
     });
 
     // 스크립트 로드 완료 이후 init() 호출
@@ -54,11 +55,38 @@ document.addEventListener("DOMContentLoaded", function () {
         alert("로그인 버튼 UI를 찾을 수 없습니다. 관리자에게 문의하세요.");
     }
 
-    let gsi_material_button=document.querySelector(".gsi-material-button");
-    gsi_material_button.addEventListener("click",function(){
+    let gsi_material_button = document.querySelector(".gsi-material-button");
+    gsi_material_button.addEventListener("click", function () {
         window.location.href = "/api/kakao/google/auth";
 
 
     });
+
+//JO-JOHA회원가입 모달창
+    let joJohaJoin = document.getElementById("jo-joha-join");
+    let joJohaJoinModalFragment = document.getElementById("jo-joha-join-modal_fragment");
+    joJohaJoin.addEventListener("click", function () {
+        joJohaJoinModalFragment.style.display = "flex";
+
+
+
+    });
+    joJohaJoinModalFragment.addEventListener("click", function (e) {
+        if(e.target === joJohaJoinModalFragment) {
+            joJohaJoinModalFragment.style.display = "none";
+        }
+    })
+
+    let joJohaLoginBox=document.querySelector(".jo-joha-login-box");
+    let realJoJohaLoginModal=document.querySelector(".real-jo-joha-login-modal");
+    joJohaLoginBox.addEventListener("click",function(){
+        realJoJohaLoginModal.style.display="flex";
+    });
+    realJoJohaLoginModal.addEventListener("click",function(e){
+        if(e.target===realJoJohaLoginModal){
+            realJoJohaLoginModal.style.display="none";
+        }
+    })
+
 })
 

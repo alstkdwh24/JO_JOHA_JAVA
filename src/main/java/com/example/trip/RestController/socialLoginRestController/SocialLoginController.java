@@ -2,8 +2,10 @@ package com.example.trip.RestController.socialLoginRestController;
 
 import com.example.trip.commendVO.GoogleVO;
 import com.example.trip.commendVO.KakaoVO;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.util.LinkedMultiValueMap;
@@ -152,7 +154,7 @@ public class SocialLoginController {
 
         @PostMapping("/google/token")
         public ResponseEntity<String> getGoogleToken(@RequestBody GoogleVO googleVO,
-                                                     @RequestHeader ("Authorization") String authorizationHeader){
+                                                     @RequestHeader ("Authorization") String authorizationHeader, HttpSession session){
 
 
 
@@ -188,7 +190,9 @@ public class SocialLoginController {
 
                 // 디버깅용 출력
                 System.out.println("id_token: " + id_token);
-
+               //세션에 저장
+                session.setAttribute("accessToken", accessToken);
+                session.setAttribute("id_token", id_token);
                 return ResponseEntity.ok(response.getBody());
             } catch (Exception e) {
                 return ResponseEntity.badRequest().body("Failed to exchange token: " + e.getMessage());
@@ -196,5 +200,36 @@ public class SocialLoginController {
 
         }
 
+@GetMapping("/google/userinfo")
+    public ResponseEntity<String> getGoogleUserInfo(HttpSession session) throws JsonProcessingException {
+            String accessToken = (String) session.getAttribute("accessToken");
+            String id_token = (String) session.getAttribute("id_token");
+            String userInfoURL= "https://www.googleapis.com/oauth2/v3/userinfo?access_token=" + accessToken;
+
+    HttpHeaders headers = new HttpHeaders();
+            headers.add("Authorization", "Bearer " + accessToken);
+
+    RestTemplate restTemplate = new RestTemplate();
+
+    HttpEntity<String> userInfoEntity = new HttpEntity<>(headers);
+
+            ResponseEntity<String> userResult=restTemplate.exchange(
+                    userInfoURL,               // 요청 URL
+                    HttpMethod.GET,            // HTTP 메서드
+                    userInfoEntity,            // 요청 데이터 (헤더 포함)
+                    String.class
+
+            );
+
+            ObjectMapper objectMapper = new ObjectMapper();
+            JsonNode userJson=objectMapper.readTree(userResult.getBody());
+
+    String email = userJson.path("email").asText();
+    System.out.println("사용자 이메일: " + email);
+
+
+    // JSON 데이터 반환
+    return ResponseEntity.ok(userJson.toPrettyString());
+}
 
 }
