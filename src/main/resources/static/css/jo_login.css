@@ -351,7 +351,7 @@ header {
 /* 여기까지 */
 /* 여기부터는 이메일 */
 
-.email-login-btn {
+.jo-joha-join-btn {
     border: none;
     /* 버튼 테두리 제거 */
     /* 버튼 배경 제거 */
@@ -375,7 +375,7 @@ header {
 
 }
 
-.email-login-btn-box img {
+.jo-joha-join-btn-box img {
     display: block;
     width: 90%;
     /* 이미지 크기 조정 */
@@ -383,7 +383,7 @@ header {
     /* 비율 유지 */
 }
 
-.email-login-btn-function {
+.jo-joha-join-btn-function {
     width: 84%;
     display: flex;
     justify-content: center;
@@ -392,7 +392,7 @@ header {
     padding: 0 9% 0 0;
 }
 
-.email-login-btn-box {
+.jo-joha-join-btn-box {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -499,4 +499,203 @@ header {
     font-size: 16px;
     padding: 0 9% 0 0;
     color: white
+}
+/*모달창 */
+#jo-joha-join-modal_fragment{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* 검은색 반투명 배경 */
+    /* 모달창이 다른 요소 위에 오도록 설정 */
+
+}
+
+#jo-joha-join-modal{
+    position: fixed; /* 화면에 고정 */
+    border-radius: 10px;
+    min-width: 378px;
+    width: 30%;
+    height: 70%;
+    top: 50%; /* 화면 높이의 50% */
+    left: 50%; /* 화면 너비의 50% */
+    transform: translate(-50%, -50%); /* 정확히 중앙으로 이동 */
+
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
+background-color: white;
+}
+
+.jo-joha-join-modal-header{
+    width: 100%;
+    height: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 150%;
+    color: dodgerblue;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+}
+
+.jo-joha-join-modal-middle-table-tbody{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.jo-joha-join-modal-middle-table{
+    width: 100%;
+    height: 66%;
+    display: flex;
+    flex-direction: column;
+    justify-content:space-around ;
+    align-items: center;
+}
+
+.tr{
+    width: 100%;
+    height: 6%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.jo-joha-join-modal-middle-table-tr{
+    width: 100%;
+    height: 13%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.jo-joha-join-modal-bottom{
+    width: 100%;
+    height: 14%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: start;
+}
+.jo-joha-join-modal-middle-table-tr-td-one{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+[class^="table-tr-td-one-input-"] {
+    width: 80%;
+    height: 100%;
+
+}
+
+.jo-joha-join-button{
+    width: 80%;
+    height: 76%;
+    background-color: dodgerblue;
+    color: white;
+    border: 1px solid dodgerblue;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*모달 JO-JOHA로그인 모달*/
+.real-jo-joha-login-modal{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* 검은색 반투명 배경 */
+    /* 모달창이 다른 요소 위에 오도록 설정 */
+}
+
+.real-jo-joha-login-modal-two{
+    position: fixed; /* 화면에 고정 */
+    border-radius: 10px;
+    min-width: 378px;
+    min-height: 378px;
+    width: 30%;
+    height: 60%;
+    top: 50%; /* 화면 높이의 50% */
+    left: 50%; /* 화면 너비의 50% */
+    transform: translate(-50%, -50%); /* 정확히 중앙으로 이동 */
+    background-color: white;
+    border: 1px solid white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+
+}
+
+.modal-two-top{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 76%;
+    border: 1px solid black;
+}
+
+.modal-two-top-top{
+    height: 34%;
+    width: 90%;
+    border: 1px solid black;
+}
+.modal-two-top-bottom{
+    height: 66%;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+}
+
+.modal-two-bottom{
+    height: 24%;
+    width: 100%;
+    border: 1px solid black;
+    display: flex;
+}
+
+.modal-two-find{
+    width: 100%;
+    height: 10%;
+    border: 1px solid black;
+}
+
+.modal-two-jo-joha-login{
+  width: 100%;
+    height: 90%;
+    border: 1px solid black;
+}
+
+[class^="login-button-"]{
+    width: 25%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
 }

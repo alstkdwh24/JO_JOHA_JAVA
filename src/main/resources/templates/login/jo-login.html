@@ -6,14 +6,19 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="appleid-signin-client-id" content="[CLIENT_ID]">
+    <meta name="appleid-signin-scope" content="[SCOPES]">
+    <meta name="appleid-signin-redirect-uri" content="[REDIRECT_URI]">
+    <meta name="appleid-signin-state" content="[STATE]">
     <title>JO-JOHA(Login)</title>
     <link rel="stylesheet" href="/css/jo_login.css">
     <script src="/js/jquery-3.7.1.min.js"></script>
-
+<!--네이버-->
     <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
+<!--애플-->
+    <script type="text/javascript" src="https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js"></script>
 
-
-
+<!--카카오-->
     <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.5/kakao.min.js"
             integrity="sha384-dok87au0gKqJdxs7msEdBPNnKSRT+/mhTVzq+qOhcL464zXwvcrpjeWvyj1kCdq6"
             crossorigin="anonymous"></script>
@@ -39,7 +44,7 @@
                     </div>
                 </div>
             </button>
-            <button class="gsi-material-button">
+            <button class="gsi-material-button" >
                 <div class="gsi-material-button-content-wrapper">
                     <div class="gsi-material-button-icon">
                         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"
@@ -74,11 +79,11 @@
                 </div>
 
             </button>
-            <button class="email-login-btn">
-                <div class="email-login-btn-box">
+            <button class="jo-joha-join-btn" id="jo-joha-join">
+                <div class="jo-joha-join-btn-box">
                     <img src="/image/mail.png" alt="Email Login Button">
                 </div>
-                <div class="email-login-btn-function">JO-JOHA 회원가입</div>
+                <div class="jo-joha-join-btn-function">JO-JOHA 회원가입</div>
             </button>
             <button class="jo-joha-login-btn">
                 <div class="jo-joha-signin">
@@ -92,6 +97,11 @@
 
     </div>
 </div>
+<div th:replace="/login/jo-joha-login.html :: jo-joha-join-modal">
+
+
+</div>
+<div th:replace="/login/jo-joha-real-login.html :: real-login"></div>
 <script src="/js/jo-joha.js?v=1.0.1"></script>
 
 </html>

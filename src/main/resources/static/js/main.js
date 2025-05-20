@@ -76,6 +76,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.log("Refresh Token:", refreshToken);
                 console.log("ID Token:", idToken);
                 console.log("구글:", response);
+                $.ajax({
+                    type:"GET",
+                    url:"/api/kakao/google/userinfo",
+                    contentType:"application/json",
+
+                })
             }
         })
     }
@@ -114,3 +120,4 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 })
+
