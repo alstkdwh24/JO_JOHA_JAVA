@@ -635,14 +635,13 @@ background-color: white;
     position: fixed; /* 화면에 고정 */
     border-radius: 10px;
     min-width: 378px;
-    min-height: 378px;
+    max-height: 308px;
     width: 30%;
     height: 60%;
     top: 50%; /* 화면 높이의 50% */
     left: 50%; /* 화면 너비의 50% */
     transform: translate(-50%, -50%); /* 정확히 중앙으로 이동 */
     background-color: white;
-    border: 1px solid white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
     display: flex;
     flex-direction: column;
@@ -658,44 +657,161 @@ background-color: white;
     justify-content: center;
     width: 100%;
     height: 76%;
-    border: 1px solid black;
 }
 
 .modal-two-top-top{
     height: 34%;
     width: 90%;
-    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
 }
 .modal-two-top-bottom{
     height: 66%;
     width: 90%;
     display: flex;
     flex-direction: column;
-    border: 1px solid black;
 }
 
 .modal-two-bottom{
-    height: 24%;
+    height: 19%;
     width: 100%;
-    border: 1px solid black;
     display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .modal-two-find{
     width: 100%;
     height: 10%;
-    border: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    font-size: 80%;
+    margin-bottom: 8%;
+}
+
+.modal-two-find-top{
+    display: flex;
+    flex-direction: row;
+    width: 70%;
 }
 
 .modal-two-jo-joha-login{
   width: 100%;
-    height: 90%;
-    border: 1px solid black;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 [class^="login-button-"]{
-    width: 25%;
+    width: 16%;
     height: 100%;
     padding: 0;
     margin: 0;
+    border: none;
+    background-color: white;
+}
+
+.modal-two-top-top-font{
+    font-size: 36px;
+    font-weight: bold;
+    color: dodgerblue;
+}
+
+.modal-two-jo-joha-login-real{
+margin-top: 1%;
+    width: 100%;
+    height:74%;
+    display:flex;
+    flex-direction: row;
+}
+
+.modal-two-jo-joha-login-real-left{
+    width: 70%;
+    height: 100%;
+}
+
+.modal-two-jo-joha-login-real-right{
+    width: 30%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-two-jo-joha-login-real-right-button{
+    width: 100%;
+    height: 100%;
+    background-color: dodgerblue;
+    color: white;
+    font-size: 20px;
+    border: none;
+}
+
+.modal-two-jo-joha-login-real-left-table-tbody{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-two-jo-joha-login-real-left-table-tr{
+    width:100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.tr-id{
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0;
+    border: 1px solid rgb(209, 207, 207);
+
+}
+
+.tr-pw{
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0;
+    border: 1px solid rgb(209, 207, 207);
+
+}
+.black{
+    width: 5%;
+    height: 100%;
+}
+
+.id-padding{
+    width: 30%;
+    padding-right: 1%;
+}
+
+.pw-padding{
+    width: 40%;
+
+    padding-left: 3%;
+}
+
+.modal-two-find-right{
+    width: 30%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 14%;
 }
