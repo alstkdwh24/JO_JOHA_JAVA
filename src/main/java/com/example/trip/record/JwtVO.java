@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 
 @Builder
 public record JwtVO(String grantType,
-String accessToken, String refreshToken, long accessTokenExpiresIn
+String accessToken, String refreshToken, String token, long accessTokenExpiresIn
 ) {}
 
 

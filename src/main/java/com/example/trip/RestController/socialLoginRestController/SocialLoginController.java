@@ -2,10 +2,13 @@ package com.example.trip.RestController.socialLoginRestController;
 
 import com.example.trip.commendVO.GoogleVO;
 import com.example.trip.commendVO.KakaoVO;
+import com.example.trip.service.socialLogin.SocialLoginService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.util.LinkedMultiValueMap;
@@ -22,6 +25,10 @@ import java.util.Map;
 @CrossOrigin(origins = "http://localhost:8081", allowCredentials = "true") // 특정 도메인에 대해 허용
 
 public class SocialLoginController {
+
+    @Autowired
+    @Qualifier("socialLoginService")
+    private SocialLoginService socialLoginService;
 
 
 
