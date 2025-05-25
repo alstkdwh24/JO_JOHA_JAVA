@@ -1,24 +1,25 @@
 package com.example.trip.RestController.LoginRestController;
 
 import com.example.trip.commendVO.JoJoHaVO;
-import com.example.trip.record.JwtVO;
 import com.example.trip.service.login.LoginService;
-import com.example.trip.util.TripTokenProvider;
+import com.example.trip.service.myUser.MyUserDetails;
+import com.example.trip.util.JwtTokenUtil;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Collections;
 
 @RestController
 @RequestMapping("/login")
+@RequiredArgsConstructor
+
 public class LoginRestController {
 
     @Autowired
@@ -29,31 +30,24 @@ public class LoginRestController {
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private TripTokenProvider tripTokenProvider;
+    private JwtTokenUtil jwtTokenUtil;
 
-    public LoginRestController(AuthenticationManager authenticationManager, TripTokenProvider tripTokenProvider) {
-        this.authenticationManager = authenticationManager;
-        this.tripTokenProvider = tripTokenProvider;
-    }
+    @GetMapping("/login")
+    public ResponseEntity<?>
+    login(@RequestBody JoJoHaVO body) {
+        UsernamePasswordAuthenticationToken authenticationToken= new UsernamePasswordAuthenticationToken(body.getUsername(), body.getPassword());
 
+        Authentication authentication = authenticationManager.authenticate(authenticationToken);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
 
-    @PostMapping("/login")
-    public Map<String, String> login(@RequestBody Map<String, String> request){
+        MyUserDetails myUserDetails = (MyUserDetails) authentication.getPrincipal();
 
-           String token   = loginService.authenticateAndGenerateToken(request.get("username"), request.get("password"));
+        String jwtToken = jwtTokenUtil.generateToken(myUserDetails);
 
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        request.get("username"),
-                        request.get("password")
-                )
-
-        ) ;           String jwtToken= String.valueOf(tripTokenProvider.jwtTokenGenerator(authentication));
-
-        Map<String, String> response=new HashMap<>();
-        response.put("token",jwtToken);
-        return response;
-
+        return ResponseEntity.ok(Collections.singletonMap("token", "Bearer " + jwtToken
+        ));
 
     }
+
+
 }

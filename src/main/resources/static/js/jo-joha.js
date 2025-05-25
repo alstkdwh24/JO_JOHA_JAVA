@@ -87,6 +87,38 @@ document.addEventListener("DOMContentLoaded", function () {
             realJoJohaLoginModal.style.display="none";
         }
     })
+    let jo_joha_join_button=document.querySelector(".jo-joha-join-button");
 
-})
+
+    jo_joha_join_button.onclick=function() {
+        let id = document.getElementById("id").value;
+        let pw = document.getElementById("pw").value;
+        let nickname = document.getElementById("nickname").value;
+        let email = document.getElementById("email").value;
+        let name = document.getElementById("name").value;
+        console.log("1"+email);
+        console.log("2"+id);
+        $.ajax({
+            url: "/login/join",
+            type: "POST",
+            contentType: "application/json", // 반드시 JSON으로 설정
+            data: JSON.stringify({
+                email: email,
+                username: id,
+                password: pw,
+                nickname: nickname,
+                name: name
+                // 동적으로 가져온 이메일 값
+            }),
+            success: function (response) {
+                alert("성공적으로 가입되었습니다!");
+            },
+            error: function (xhr, status, error) {
+                alert("오류가 발생했습니다: " + error);
+            }
+        });
+    }
+
+
+});
 

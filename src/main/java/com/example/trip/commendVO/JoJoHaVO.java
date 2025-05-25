@@ -1,21 +1,56 @@
 package com.example.trip.commendVO;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
-@Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
-public class JoJoHaVO {
+@Data
+
+public class JoJoHaVO  {
+
+    private String id;
     private String username;
+    @JsonIgnore
     private String password;
-    private String nickname;
     private String email;
-    private String name;
-    private Set<String> roles;  // 권한을 여러 개 포함할 수 있도록 Set으로 변경
+    private boolean enabled;
+    private String role;
+    private String createdAt;
+    private String updatedAt;
+
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    @Data
+    public static class UserBase {
+        private String id;
+        private String username;
+        @JsonIgnore
+        private String password;
+        private String email;
+        private boolean enabled;
+        private String role;
+        private String createdAt;
+        private String updatedAt;
+    }
+
+
+
+
+    @Data
+    @Builder
+    public static class UserSearchByUsernameCondition {
+        private String username;
+    }
+
 }
