@@ -3,15 +3,13 @@ package com.example.trip.util;
 import com.example.trip.service.myUser.MyUserDetails;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import javax.crypto.SecretKey;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -20,40 +18,47 @@ import java.util.function.Function;
 @Component
 public class JwtTokenUtil {
 
-    @Value("${jwt.secret}")//secret.key 파일의 고정된 비밀 키 사용
+    @Value("${jwt.secret}")
+    private String secretKeyString;
 
-    private String secretKey;
+    private SecretKey secretKey;
 
     @PostConstruct
     public void init() {
-        if (secretKey == null || secretKey.isEmpty()) {
+        if (secretKeyString == null || secretKeyString.isEmpty()) {
             throw new RuntimeException("secret.key 를 읽어올 수 없습니다.");
         }
-        System.out.println("Secret key loaded successfully: " + secretKey);
+        // String -> SecretKey 변환
+        secretKey = Keys.hmacShaKeyFor(secretKeyString.getBytes(StandardCharsets.UTF_8));
+        System.out.println("Secret key loaded successfully: " + secretKeyString);
     }
 
-    // JWT 토큰에서 이메일을 추출
+    // JWT 토큰에서 이메일 추출
     public String extractUsername(String token){
-        return extractClaim(token, Claims::getSubject); //subject를 이메일로 사용
+        return extractClaim(token, Claims::getSubject);
     }
 
-    //JWT 토큰에서 만료시간을 추출
+    // JWT 토큰에서 만료시간 추출
     public Date extractExpiration(String token){
         return extractClaim(token, Claims::getExpiration);
     }
 
-    //JWT 토큰에서 특정 클레인을 추출
-    public <T> T extractClaim(String token, Function<Claims, T>claimsResolver){
+    // JWT 토큰에서 특정 클레인 추출
+    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver){
         final Claims claims = extractAllClaims(token);
         return claimsResolver.apply(claims);
     }
 
-    //JWT 토큰에서 모든 클레임을 추출
+    // JWT 토큰에서 모든 클레인 추출
     private Claims extractAllClaims(String token){
-        return Jwts.parserBuilder().setSigningKey(secretKey.getBytes()).build().parseClaimsJws(token).getBody();
+        return Jwts.parserBuilder()
+                .setSigningKey(secretKey)
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
     }
 
-    //JWT 토큰에서 만료되었는지 확인
+    // JWT 토큰 만료 확인
     private boolean isTokenExpired(String token){
         return extractExpiration(token).before(new Date());
     }
@@ -64,14 +69,18 @@ public class JwtTokenUtil {
         return createToken(claims, myUserDetails.getUsername());
     }
 
-    //클래임과 주제를 기반으로 JWT 토큰 생성
+    // 클레임과 주제를 기반으로 JWT 토큰 생성
     private String createToken(Map<String, Object> claims, String subject){
-        return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis()+ 1000 * 60 * 60* 24)) //24시간 동안 유효
-                .signWith(SignatureAlgorithm.HS256, secretKey.getBytes()).compact();
+        return Jwts.builder()
+                .setClaims(claims)
+                .setSubject(subject)
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24)) // 24시간 유효
+                .signWith(secretKey)  // SecretKey 객체 사용
+                .compact();
     }
 
-    //JWT 토큰의 유효성 검증
+    // JWT 토큰 유효성 검증
     public Boolean validateToken(String token, MyUserDetails myUserDetails){
         final String username = extractUsername(token);
         return (username.equals(myUserDetails.getUsername()) && !isTokenExpired(token));

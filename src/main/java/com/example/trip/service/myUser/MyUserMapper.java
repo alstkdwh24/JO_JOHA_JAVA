@@ -4,7 +4,9 @@ import com.example.trip.commendVO.JoJoHaVO;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface UserMapper {
-    JoJoHaVO.UserBase findByUsername(JoJoHaVO.UserSearchByUsernameCondition param);
+public interface MyUserMapper{
+    JoJoHaVO findByUsername(String username);
+
+    int joins(JoJoHaVO user);
 
 }

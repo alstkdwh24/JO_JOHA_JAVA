@@ -96,6 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let nickname = document.getElementById("nickname").value;
         let email = document.getElementById("email").value;
         let name = document.getElementById("name").value;
+        let user="USER_ROLE";
         console.log("1"+email);
         console.log("2"+id);
         $.ajax({
@@ -107,7 +108,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 username: id,
                 password: pw,
                 nickname: nickname,
-                name: name
+                name: name,
+                roles: user
                 // 동적으로 가져온 이메일 값
             }),
             success: function (response) {

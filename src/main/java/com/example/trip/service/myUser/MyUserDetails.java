@@ -47,6 +47,8 @@ public class MyUserDetails implements UserDetails {
 
 
     // 컬렉션 값이 저장되는 컬럼 이름
+    @Builder.Default
+
     private Set<String> roles = new HashSet<>(); // 역할 저장 필드 초기화
 
     @Override

@@ -26,8 +26,9 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf' // Thymeleaf 의존성 추가
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'// MyBatis Spring Boot Starter
-    runtimeOnly 'mysql:mysql-connector-java:8.0.33' // 최신 버전 사용
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'// MyBatis Spring Boot Starter
+	runtimeOnly 'com.mysql:mysql-connector-j'
     implementation 'org.springframework.boot:spring-boot-starter-jdbc' // JDBC 지원
 
 	implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -44,7 +45,6 @@ dependencies {
 	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
 	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5' // Jackson 사용 시 필요
 
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
 
 }
