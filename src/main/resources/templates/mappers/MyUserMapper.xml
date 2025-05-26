@@ -8,4 +8,16 @@
         INSERT INTO tripMember (username, password, email, nickname, name, roles)
         VALUES (#{username}, #{password}, #{email}, #{nickname}, #{name}, #{roles});
     </insert>
+
+    <select id="findByUsernameName" parameterType="string" resultType="com.example.trip.commendVO.JoJoHaVO"
+>
+        SELECT * FROM tripMember
+        WHERE username = #{username}
+    </select>
+
+    <select id="findByUsername" parameterType="string" resultType="com.example.trip.commendVO.JoJoHaVO">
+        SELECT * FROM tripMember
+        WHERE username = #{username}
+    </select>
+
 </mapper>

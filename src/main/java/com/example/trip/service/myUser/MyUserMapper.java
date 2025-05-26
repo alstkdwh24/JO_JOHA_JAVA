@@ -5,8 +5,12 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface MyUserMapper{
-    JoJoHaVO findByUsername(String username);
+
 
     int joins(JoJoHaVO user);
 
+    JoJoHaVO findByUsernameName(String username);
+
+
+    JoJoHaVO findByUsername(String username);
 }

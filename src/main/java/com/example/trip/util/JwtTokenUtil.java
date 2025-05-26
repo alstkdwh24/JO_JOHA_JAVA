@@ -64,10 +64,12 @@ public class JwtTokenUtil {
     }
 
     // 사용자 정보를 기반으로 JWT 토큰 생성
-    public String generateToken(MyUserDetails myUserDetails){
+// 사용자 이름만으로 JWT 토큰 생성
+    public String generateToken(String username) {
         Map<String, Object> claims = new HashMap<>();
-        return createToken(claims, myUserDetails.getUsername());
+        return createToken(claims, username);
     }
+
 
     // 클레임과 주제를 기반으로 JWT 토큰 생성
     private String createToken(Map<String, Object> claims, String subject){

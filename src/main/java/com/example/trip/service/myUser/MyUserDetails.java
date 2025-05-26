@@ -36,14 +36,6 @@ public class MyUserDetails implements UserDetails {
 
     private boolean enabled; // 계정의 활성화 여부
 
-    public MyUserDetails(String id, String username, String email, String password, Collection<? extends GrantedAuthority> authorities, boolean enabled) {
-
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        this.authorities = authorities;
-        this.enabled = enabled;
-    }
 
 
     // 컬렉션 값이 저장되는 컬럼 이름
