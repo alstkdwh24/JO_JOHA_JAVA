@@ -1,21 +1,22 @@
 package com.example.trip.commendVO;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import java.util.Set;
-
-@Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
-public class JoJoHaVO {
+@Data
+public class JoJoHaVO  {
+
     private String username;
+
+    // 비밀번호 필수 검증
     private String password;
-    private String nickname;
+
     private String email;
+
+    private String nickname;
     private String name;
-    private Set<String> roles;  // 권한을 여러 개 포함할 수 있도록 Set으로 변경
+    private String roles;
+
 }

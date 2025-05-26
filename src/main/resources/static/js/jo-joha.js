@@ -87,6 +87,87 @@ document.addEventListener("DOMContentLoaded", function () {
             realJoJohaLoginModal.style.display="none";
         }
     })
+    let jo_joha_join_button=document.querySelector(".jo-joha-join-button");
 
-})
+
+    jo_joha_join_button.onclick=function() {
+        let id = document.getElementById("id").value;
+        let pw = document.getElementById("pw").value;
+        let nickname = document.getElementById("nickname").value;
+        let email = document.getElementById("email").value;
+        let name = document.getElementById("name").value;
+        let user="USER_ROLE";
+        console.log("1"+email);
+        console.log("2"+id);
+
+        $.ajax({
+            url:"/login/sameId",
+            type:"GET",
+            data: {
+
+                username: id,
+
+            },
+            success: function (response) {
+
+
+                $.ajax({
+                    url: "/login/join",
+                    type: "POST",
+                    contentType: "application/json", // 반드시 JSON으로 설정
+                    data: JSON.stringify({
+                        email: email,
+                        username: id,
+                        password: pw,
+                        nickname: nickname,
+                        name: name,
+                        roles: user
+                        // 동적으로 가져온 이메일 값
+                    }),
+                    success: function (response) {
+                        alert("성공적으로 가입되었습니다!");
+                    },
+                    error: function (xhr, status, error) {
+                        alert("오류가 발생했습니다: " + error);
+                    }
+                });
+        },
+        error: function (xhr, status, error) {
+            alert("아이디가 존재합니다.!");
+        }
+        })
+    }
+
+
+    let modalTwoJoJohaLoginRealRightButton= document.querySelector(".modal-two-jo-joha-login-real-right-button");
+    modalTwoJoJohaLoginRealRightButton.onclick=function(){
+        let id= document.querySelector(".tr-id").value;
+        let pw= document.querySelector(".tr-pw").value;
+
+        $.ajax({
+            url: "/login/joJoLogin",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify({
+                username: id,
+                password: pw
+            }),
+            success: function (response) {
+                if (response.code === 200) {
+                    alert("response"+response.message);
+                    console.log("response", JSON.stringify(response));
+                    window.location.href = "/main";
+                } else {
+                    alert(response.message);
+                }
+            },
+            error: function (xhr) {
+                alert("서버 오류 또는 네트워크 오류 발생: " + xhr.status);
+            }
+        });
+
+
+    }
+
+});
 
