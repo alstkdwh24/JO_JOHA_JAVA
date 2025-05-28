@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
 </head>
-<link rel="stylesheet" href="/css/topPage.css">
 
 <body>
     <header th:fragment="topPageHeader">
@@ -17,7 +17,10 @@
         <div class="titleSpacer"></div>
 
         <button class="login-btn" onclick="location.href='/login/jo-login'">로그인/회원가입</button>
-        <div class="login-btnSpacer1"></div>
+       <div class="loginImage" onclick="location.href='/login/jo-login'">
+           <div class="img">LOGIN</div>
+       </div>
+           <div class="login-btnSpacer1"></div>
         <!-- 햄버거 메뉴 -->
         <div class="hamburger">
             <div></div>
